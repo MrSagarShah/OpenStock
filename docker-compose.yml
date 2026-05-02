@@ -1,33 +1,46 @@
 services:
   openstock:
-    build:
-      context: .
-      extra_hosts:
-        - "mongodb:host-gateway"
-    ports:
-      - "3000:3000"
+    image: openstock-explore:latest
+    container_name: openstock
     env_file:
       - .env
     restart: unless-stopped
     depends_on:
       - mongodb
+    networks:
+      - web
+      - openstock-internal
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=web"
+      - "traefik.http.routers.openstock.rule=Host(`stocks.goodthoughts.in`)"
+      - "traefik.http.routers.openstock.entrypoints=websecure"
+      - "traefik.http.routers.openstock.tls=true"
+      - "traefik.http.routers.openstock.tls.certresolver=letsencrypt"
+      - "traefik.http.services.openstock.loadbalancer.server.port=3000"
 
   mongodb:
     image: mongo:7
-    container_name: mongodb
+    container_name: openstock-mongodb
     restart: unless-stopped
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-    ports:
-      - "27017:27017"
     volumes:
       - mongo-data:/data/db
+    networks:
+      - openstock-internal
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 10s
       timeout: 5s
       retries: 5
+
+networks:
+  web:
+    external: true
+  openstock-internal:
+    driver: bridge
 
 volumes:
   mongo-data:

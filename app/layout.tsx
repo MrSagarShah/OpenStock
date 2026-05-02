@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OpenStock",
-  description: "OpenStock is an open-source alternative to expensive market platforms. Track real-time prices, set personalized alerts, and explore detailed company insights — built openly, for everyone, forever free.",
+  title: "Good Thoughts Stocks",
+  description: "Good Thoughts Stocks — track US market prices, explore charts, and manage your watchlist. A companion to Good Thoughts Financial for Indian markets.",
 };
 
 export default function RootLayout({

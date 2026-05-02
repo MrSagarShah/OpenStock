@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import WatchlistStockChip from './WatchlistStockChip';
-import TradingViewWatchlist from './TradingViewWatchlist';
+import WatchlistQuotes from './WatchlistQuotes';
 import { Button } from '@/components/ui/button';
 import { ArrowDownAZ, ArrowUpZA, ArrowUpDown } from 'lucide-react';
 import { WatchlistItem } from '@/database/models/watchlist.model';
@@ -87,8 +87,8 @@ export default function WatchlistManager({ initialItems, userId }: WatchlistMana
                 )}
             </div>
 
-            <div className="min-h-[550px]">
-                <TradingViewWatchlist symbols={watchlistSymbols} />
+            <div className="min-h-[400px]">
+                <WatchlistQuotes symbols={watchlistSymbols} />
             </div>
         </div>
     );
