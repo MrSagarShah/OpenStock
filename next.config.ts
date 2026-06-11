@@ -2,7 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
     devIndicators: false,
-    /* config options here */
+    // Served as the "Markets" section under goodthoughts.in/markets. basePath is
+    // build-time: it prefixes routes AND _next asset URLs so everything resolves
+    // behind the Traefik PathPrefix(/markets) router (no StripPrefix).
+    basePath: '/markets',
+    assetPrefix: '/markets',
     images: {
         remotePatterns: [
             {
