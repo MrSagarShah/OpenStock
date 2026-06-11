@@ -9,7 +9,7 @@ export default async function NewsFeed({ symbols, title = 'Top Stories' }: { sym
     }
 
     return (
-        <div className="rounded-xl border border-white/10 bg-black/40 p-5 backdrop-blur-md">
+        <div className="rounded-xl border border-black/10 bg-white/70 p-5 backdrop-blur-md">
             <h3 className="mb-4 text-lg font-semibold text-gray-100">{title}</h3>
             {articles.length === 0 ? (
                 <p className="text-sm text-gray-400">No news available.</p>
@@ -30,7 +30,7 @@ export default async function NewsFeed({ symbols, title = 'Top Stories' }: { sym
                                     href={a.url}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="line-clamp-2 text-sm font-medium text-gray-100 hover:text-[#0FEDBE]"
+                                    className="line-clamp-2 text-sm font-medium text-gray-100 hover:text-[#059669]"
                                 >
                                     {a.headline}
                                 </a>

@@ -71,11 +71,11 @@ export default function InteractiveChart({ symbol, initialCandles, initialRange 
 
         if (type === 'candles') {
             const s = chart.addSeries(CandlestickSeries, {
-                upColor: '#0FEDBE',
+                upColor: '#059669',
                 downColor: '#ef4444',
-                borderUpColor: '#0FEDBE',
+                borderUpColor: '#059669',
                 borderDownColor: '#ef4444',
-                wickUpColor: '#0FEDBE',
+                wickUpColor: '#059669',
                 wickDownColor: '#ef4444',
             });
             s.setData(
@@ -102,7 +102,7 @@ export default function InteractiveChart({ symbol, initialCandles, initialRange 
             );
         } else if (type === 'area') {
             const s = chart.addSeries(AreaSeries, {
-                lineColor: '#0FEDBE',
+                lineColor: '#059669',
                 topColor: 'rgba(15, 237, 190, 0.35)',
                 bottomColor: 'rgba(15, 237, 190, 0)',
                 lineWidth: 2,
@@ -110,7 +110,7 @@ export default function InteractiveChart({ symbol, initialCandles, initialRange 
             s.setData(candles.map((c) => ({ time: c.time as UTCTimestamp, value: c.close })));
         } else {
             const s = chart.addSeries(LineSeries, {
-                color: '#0FEDBE',
+                color: '#059669',
                 lineWidth: 2,
             });
             s.setData(candles.map((c) => ({ time: c.time as UTCTimestamp, value: c.close })));
@@ -154,18 +154,18 @@ export default function InteractiveChart({ symbol, initialCandles, initialRange 
     }, [candles, type, height, showSMA]);
 
     return (
-        <div className="w-full rounded-xl border border-white/10 bg-black/40 p-4 backdrop-blur-md">
+        <div className="w-full rounded-xl border border-black/10 bg-white/70 p-4 backdrop-blur-md">
             <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
                 <h3 className="text-lg font-semibold text-gray-100">{symbol}</h3>
                 <div className="flex items-center gap-2">
-                    <div className="flex overflow-hidden rounded-lg border border-white/10 bg-white/5">
+                    <div className="flex overflow-hidden rounded-lg border border-black/10 bg-white/5">
                         {TYPES.map((t) => (
                             <button
                                 key={t.key}
                                 onClick={() => setType(t.key)}
                                 className={`px-3 py-1 text-xs font-medium transition-colors ${
                                     type === t.key
-                                        ? 'bg-[#0FEDBE] text-gray-900'
+                                        ? 'bg-[#059669] text-gray-900'
                                         : 'text-gray-300 hover:bg-white/10'
                                 }`}
                             >
@@ -175,16 +175,16 @@ export default function InteractiveChart({ symbol, initialCandles, initialRange 
                     </div>
                     <button
                         onClick={() => setShowSMA((v) => !v)}
-                        className={`rounded-lg border border-white/10 px-3 py-1 text-xs font-medium transition-colors ${
+                        className={`rounded-lg border border-black/10 px-3 py-1 text-xs font-medium transition-colors ${
                             showSMA
-                                ? 'bg-[#0FEDBE] text-gray-900'
+                                ? 'bg-[#059669] text-gray-900'
                                 : 'bg-white/5 text-gray-300 hover:bg-white/10'
                         }`}
                         title="Toggle SMA 20 / 50 / 200 overlay"
                     >
                         SMA
                     </button>
-                    <div className="flex overflow-hidden rounded-lg border border-white/10 bg-white/5">
+                    <div className="flex overflow-hidden rounded-lg border border-black/10 bg-white/5">
                         {RANGES.map((r) => (
                             <button
                                 key={r.key}
@@ -192,7 +192,7 @@ export default function InteractiveChart({ symbol, initialCandles, initialRange 
                                 disabled={pending}
                                 className={`px-3 py-1 text-xs font-medium transition-colors ${
                                     range === r.key
-                                        ? 'bg-[#0FEDBE] text-gray-900'
+                                        ? 'bg-[#059669] text-gray-900'
                                         : 'text-gray-300 hover:bg-white/10'
                                 } ${pending && range !== r.key ? 'opacity-50' : ''}`}
                             >

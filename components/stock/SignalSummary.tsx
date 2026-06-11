@@ -7,7 +7,7 @@ export default async function SignalSummary({ symbol }: { symbol: string }) {
 
     if (candles.length < 20) {
         return (
-            <div className="rounded-xl border border-white/10 bg-black/40 p-5 text-sm text-gray-400 backdrop-blur-md">
+            <div className="rounded-xl border border-black/10 bg-white/70 p-5 text-sm text-gray-400 backdrop-blur-md">
                 Insufficient price history for signals.
             </div>
         );
@@ -16,17 +16,17 @@ export default async function SignalSummary({ symbol }: { symbol: string }) {
     const a = analyzeSignals(candles);
 
     const verdictTone =
-        a.label === 'Strong Buy' ? 'bg-[#0FEDBE] text-gray-900'
-        : a.label === 'Buy' ? 'bg-[#0FEDBE]/30 text-[#0FEDBE] border border-[#0FEDBE]/40'
+        a.label === 'Strong Buy' ? 'bg-[#059669] text-gray-900'
+        : a.label === 'Buy' ? 'bg-[#059669]/30 text-[#059669] border border-[#059669]/40'
         : a.label === 'Strong Sell' ? 'bg-red-500 text-white'
         : a.label === 'Sell' ? 'bg-red-500/30 text-red-300 border border-red-500/40'
-        : 'bg-white/10 text-gray-200 border border-white/10';
+        : 'bg-white/10 text-gray-200 border border-black/10';
 
     const dotColor = (v: 'bull' | 'bear' | 'neutral') =>
-        v === 'bull' ? 'bg-[#0FEDBE]' : v === 'bear' ? 'bg-red-400' : 'bg-gray-500';
+        v === 'bull' ? 'bg-[#059669]' : v === 'bear' ? 'bg-red-400' : 'bg-gray-500';
 
     return (
-        <div className="rounded-xl border border-white/10 bg-black/40 p-5 backdrop-blur-md">
+        <div className="rounded-xl border border-black/10 bg-white/70 p-5 backdrop-blur-md">
             <div className="mb-4 flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-gray-100">Signal Summary</h3>
                 <span className={`rounded-full px-3 py-1 text-xs font-bold ${verdictTone}`}>
@@ -36,7 +36,7 @@ export default async function SignalSummary({ symbol }: { symbol: string }) {
 
             <div className="mb-4 flex items-center gap-3 text-sm">
                 <div className="flex items-center gap-1.5">
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#0FEDBE]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#059669]" />
                     <span className="text-gray-300">{a.bullish} bullish</span>
                 </div>
                 <div className="flex items-center gap-1.5">
@@ -57,7 +57,7 @@ export default async function SignalSummary({ symbol }: { symbol: string }) {
                 ))}
             </ul>
 
-            <p className="mt-4 border-t border-white/10 pt-3 text-xs text-gray-500">
+            <p className="mt-4 border-t border-black/10 pt-3 text-xs text-gray-500">
                 Signals are derived from price history. Not financial advice.
             </p>
         </div>

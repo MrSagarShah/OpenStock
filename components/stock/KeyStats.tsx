@@ -17,7 +17,7 @@ export default async function KeyStats({ symbol }: { symbol: string }) {
     const q = await getQuote(symbol);
     if (!q) {
         return (
-            <div className="rounded-xl border border-white/10 bg-black/40 p-5 text-sm text-gray-400 backdrop-blur-md">
+            <div className="rounded-xl border border-black/10 bg-white/70 p-5 text-sm text-gray-400 backdrop-blur-md">
                 Key stats unavailable.
             </div>
         );
@@ -33,7 +33,7 @@ export default async function KeyStats({ symbol }: { symbol: string }) {
     ];
 
     return (
-        <div className="rounded-xl border border-white/10 bg-black/40 p-5 backdrop-blur-md">
+        <div className="rounded-xl border border-black/10 bg-white/70 p-5 backdrop-blur-md">
             <h3 className="mb-4 text-lg font-semibold text-gray-100">Key Stats</h3>
             <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
                 {rows.map(([k, v]) => (

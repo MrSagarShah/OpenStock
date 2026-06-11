@@ -10,12 +10,10 @@ const Header = async ({ user }: { user: User | null }) => {
     return (
         <header className="sticky top-0 header">
             <div className="container header-wrapper">
+                {/* Brand lives in the shared GoodThoughtsShell above; this bar is
+                    the Markets section's own sub-nav. */}
                 <Link href="/" className="flex items-center gap-2">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0FEDBE] text-gray-900 font-black text-lg">GT</span>
-                    <span className="flex flex-col leading-tight">
-                        <span className="text-lg font-bold text-gray-100">Good Thoughts</span>
-                        <span className="text-xs font-medium tracking-widest text-[#0FEDBE] uppercase">Stocks</span>
-                    </span>
+                    <span className="text-sm font-semibold tracking-widest text-teal-600 uppercase">Markets</span>
                 </Link>
                 <nav className="hidden sm:block">
                     <NavItems initialStocks={initialStocks} />

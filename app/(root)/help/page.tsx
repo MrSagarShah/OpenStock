@@ -29,8 +29,8 @@ export default function HelpPage() {
     return (
         <div className="max-w-4xl mx-auto px-4 pb-20">
             <div className="text-center pt-16 pb-12 space-y-4">
-                <div className="inline-flex p-3 bg-[#0FEDBE]/10 rounded-2xl border border-[#0FEDBE]/20 mb-4">
-                    <HelpCircle className="text-[#0FEDBE] h-8 w-8" />
+                <div className="inline-flex p-3 bg-[#059669]/10 rounded-2xl border border-[#059669]/20 mb-4">
+                    <HelpCircle className="text-[#059669] h-8 w-8" />
                 </div>
                 <h1 className="text-4xl md:text-5xl font-bold text-white">How can we help?</h1>
                 <p className="text-xl text-gray-400">Quick answers below.</p>
@@ -42,7 +42,7 @@ export default function HelpPage() {
                     {faqs.map((faq, idx) => (
                         <div key={idx} className="bg-gray-900/50 border border-gray-800 rounded-xl p-6 hover:bg-gray-800/50 transition-colors">
                             <h3 className="font-semibold text-lg text-gray-200 mb-2 flex items-start gap-3">
-                                <Lightbulb size={20} className="text-[#0FEDBE]/60 mt-1 shrink-0" />
+                                <Lightbulb size={20} className="text-[#059669]/60 mt-1 shrink-0" />
                                 {faq.question}
                             </h3>
                             <p className="text-gray-400 leading-relaxed ml-8 pl-1 border-l-2 border-gray-800">

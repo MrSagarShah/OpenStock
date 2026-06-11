@@ -14,7 +14,7 @@ export default async function SymbolInfo({ symbol }: { symbol: string }) {
     const up = (q?.change ?? 0) >= 0;
 
     return (
-        <div className="rounded-xl border border-white/10 bg-black/40 p-5 backdrop-blur-md">
+        <div className="rounded-xl border border-black/10 bg-white/70 p-5 backdrop-blur-md">
             <div className="flex items-start gap-4">
                 <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-white/5 text-lg font-bold text-gray-300">
                     {symbol.slice(0, 2)}
@@ -30,7 +30,7 @@ export default async function SymbolInfo({ symbol }: { symbol: string }) {
                     <div className="text-3xl font-bold text-gray-100">
                         {fmtPrice(q?.price, q?.currency)}
                     </div>
-                    <div className={up ? 'text-[#0FEDBE]' : 'text-red-400'}>
+                    <div className={up ? 'text-[#059669]' : 'text-red-400'}>
                         {up ? '+' : ''}
                         {q?.change != null ? q.change.toFixed(2) : '—'} ({up ? '+' : ''}
                         {q?.changePercent != null ? q.changePercent.toFixed(2) : '—'}%)

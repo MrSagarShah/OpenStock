@@ -10,7 +10,7 @@ export default async function QuoteList({ title, symbols }: QuoteListProps) {
     const data = await getQuotes(symbols);
 
     return (
-        <div className="rounded-xl border border-white/10 bg-black/40 p-4 backdrop-blur-md">
+        <div className="rounded-xl border border-black/10 bg-white/70 p-4 backdrop-blur-md">
             {title && <h3 className="mb-4 text-lg font-semibold text-gray-100">{title}</h3>}
             <ul className="divide-y divide-white/5">
                 {data.map((row) => {
@@ -35,7 +35,7 @@ export default async function QuoteList({ title, symbols }: QuoteListProps) {
                                         {row.currency === 'USD' ? '$' : ''}
                                         {row.price.toFixed(2)}
                                     </div>
-                                    <div className={`text-xs ${up ? 'text-[#0FEDBE]' : 'text-red-400'}`}>
+                                    <div className={`text-xs ${up ? 'text-[#059669]' : 'text-red-400'}`}>
                                         {up ? '+' : ''}
                                         {row.changePercent.toFixed(2)}%
                                     </div>

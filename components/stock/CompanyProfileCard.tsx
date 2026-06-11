@@ -11,7 +11,7 @@ export default async function CompanyProfileCard({ symbol }: { symbol: string })
     const profile = await getCompanyProfile(symbol);
     if (!profile) {
         return (
-            <div className="rounded-xl border border-white/10 bg-black/40 p-5 text-sm text-gray-400 backdrop-blur-md">
+            <div className="rounded-xl border border-black/10 bg-white/70 p-5 text-sm text-gray-400 backdrop-blur-md">
                 Company profile unavailable.
             </div>
         );
@@ -27,7 +27,7 @@ export default async function CompanyProfileCard({ symbol }: { symbol: string })
     ];
 
     return (
-        <div className="rounded-xl border border-white/10 bg-black/40 p-5 backdrop-blur-md">
+        <div className="rounded-xl border border-black/10 bg-white/70 p-5 backdrop-blur-md">
             <h3 className="mb-4 text-lg font-semibold text-gray-100">Company Profile</h3>
             <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
                 {rows.map(([k, v]) => (
@@ -42,7 +42,7 @@ export default async function CompanyProfileCard({ symbol }: { symbol: string })
                     href={profile.weburl}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-4 inline-block text-sm text-[#0FEDBE] hover:underline"
+                    className="mt-4 inline-block text-sm text-[#059669] hover:underline"
                 >
                     {profile.weburl}
                 </a>

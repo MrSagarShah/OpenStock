@@ -17,19 +17,19 @@ export default async function StockNews({ symbol }: { symbol: string }) {
     const articles = await getNewsForSymbol(symbol, 8);
 
     return (
-        <div className="rounded-xl border border-white/10 bg-black/40 p-5 backdrop-blur-md">
+        <div className="rounded-xl border border-black/10 bg-white/70 p-5 backdrop-blur-md">
             <h3 className="mb-4 text-lg font-semibold text-gray-100">Recent News</h3>
             {articles.length === 0 ? (
                 <p className="text-sm text-gray-400">No recent news for {symbol}.</p>
             ) : (
                 <ul className="space-y-3">
                     {articles.map((a) => (
-                        <li key={a.link} className="border-b border-white/5 pb-3 last:border-0 last:pb-0">
+                        <li key={a.link} className="border-b border-black/5 pb-3 last:border-0 last:pb-0">
                             <a
                                 href={a.link}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="block text-sm font-medium text-gray-100 hover:text-[#0FEDBE]"
+                                className="block text-sm font-medium text-gray-100 hover:text-[#059669]"
                             >
                                 {a.title}
                             </a>

@@ -28,7 +28,7 @@ export default function WatchlistQuotes({ symbols }: { symbols: string[] }) {
 
     if (!symbols || symbols.length === 0) {
         return (
-            <div className="flex h-[200px] items-center justify-center rounded-xl border border-white/10 bg-black/40 text-sm text-gray-400 backdrop-blur-md">
+            <div className="flex h-[200px] items-center justify-center rounded-xl border border-black/10 bg-white/70 text-sm text-gray-400 backdrop-blur-md">
                 Add stocks to your watchlist to see live quotes.
             </div>
         );
@@ -36,14 +36,14 @@ export default function WatchlistQuotes({ symbols }: { symbols: string[] }) {
 
     if (rows === null) {
         return (
-            <div className="flex h-[200px] items-center justify-center rounded-xl border border-white/10 bg-black/40 text-sm text-gray-400 backdrop-blur-md">
+            <div className="flex h-[200px] items-center justify-center rounded-xl border border-black/10 bg-white/70 text-sm text-gray-400 backdrop-blur-md">
                 Loading quotes…
             </div>
         );
     }
 
     return (
-        <div className="overflow-hidden rounded-xl border border-white/10 bg-black/40 backdrop-blur-md">
+        <div className="overflow-hidden rounded-xl border border-black/10 bg-white/70 backdrop-blur-md">
             <table className="w-full text-sm">
                 <thead className="bg-white/5 text-xs uppercase tracking-wide text-gray-400">
                     <tr>
@@ -69,11 +69,11 @@ export default function WatchlistQuotes({ symbols }: { symbols: string[] }) {
                                     {row.currency === 'USD' ? '$' : ''}
                                     {row.price.toFixed(2)}
                                 </td>
-                                <td className={`px-4 py-3 text-right ${up ? 'text-[#0FEDBE]' : 'text-red-400'}`}>
+                                <td className={`px-4 py-3 text-right ${up ? 'text-[#059669]' : 'text-red-400'}`}>
                                     {up ? '+' : ''}
                                     {row.change.toFixed(2)}
                                 </td>
-                                <td className={`px-4 py-3 text-right ${up ? 'text-[#0FEDBE]' : 'text-red-400'}`}>
+                                <td className={`px-4 py-3 text-right ${up ? 'text-[#059669]' : 'text-red-400'}`}>
                                     {up ? '+' : ''}
                                     {row.changePercent.toFixed(2)}%
                                 </td>

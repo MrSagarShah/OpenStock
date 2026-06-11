@@ -30,7 +30,7 @@ export default function ApiDocsPage() {
             <h2 className="mt-10 mb-4 text-2xl font-semibold">Related product</h2>
             <p className="text-gray-300">
                 For Indian equities (NSE/BSE), visit{' '}
-                <a href="https://financial.goodthoughts.in" className="text-[#0FEDBE] hover:underline">
+                <a href="https://financial.goodthoughts.in" className="text-[#059669] hover:underline">
                     Good Thoughts Financial
                 </a>
                 .

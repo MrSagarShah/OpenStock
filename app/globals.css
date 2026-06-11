@@ -112,24 +112,47 @@
     --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
-/* === CUSTOM COLOR THEME === */
+/* === GOOD THOUGHTS LIGHT THEME ("Digital Curator") ===
+   openstock components hardcode a DARK gray scale (gray-900 = backgrounds,
+   gray-100/400 = text) + teal accents across ~120 utility classes. Rather than
+   touch all of them, we INVERT the gray scale VALUES here (gray-900 -> lightest
+   surface, gray-100/400 -> dark text) and repoint teal -> Good Thoughts green.
+   Forced `.dark` is dropped in layout.tsx so the shadcn :root (light) tokens
+   apply too. Result: the whole UI flips to light/green with no component edits. */
 @theme {
-    /* Extended Gray Scale */
-    --color-gray-900: #050505;
-    --color-gray-800: #141414;
-    --color-gray-700: #212328;
-    --color-gray-600: #30333A;
-    --color-gray-500: #9095A1;
-    --color-gray-400: #CCDADC;
+    /* Inverted gray scale — high N = light surface, low N = dark text */
+    --color-gray-900: #faf8ff;   /* page background (was darkest) */
+    --color-gray-800: #ffffff;   /* cards / header / inputs (white lift) */
+    --color-gray-700: #f2f3ff;   /* raised rows / table headers */
+    --color-gray-600: #dbe0ef;   /* borders (light but visible) */
+    --color-gray-500: #6f7973;   /* muted text / icons */
+    --color-gray-400: #131b2e;   /* PRIMARY body text (85 uses) */
+    --color-gray-300: #3f4944;   /* secondary text */
+    --color-gray-200: #1f2937;   /* text */
+    --color-gray-100: #0d1117;   /* headings (darkest) */
+    --color-gray-50:  #f8faf5;
 
-    /* Vibrant Colors */
-    --color-blue-600: #5862FF;
-    --color-yellow-400: #FDD458;
-    --color-yellow-500: #E8BA40;
-    --color-teal-400: #0FEDBE;
-    --color-red-500: #FF495B;
-    --color-orange-500: #FF8243;
-    --color-purple-500: #D13BFF;
+    /* Accent: teal -> Good Thoughts green (emerald family toward #004532) */
+    --color-teal-100: #d1fae5;
+    --color-teal-300: #34d399;
+    --color-teal-400: #10b981;
+    --color-teal-500: #059669;   /* buttons / primary accent (27 uses) */
+    --color-teal-600: #047857;
+    --color-teal-800: #065f46;
+    --color-teal-900: #004532;   /* brand deep green */
+
+    /* Status colors — kept vivid and readable on light */
+    --color-red-400: #ef4444;
+    --color-red-500: #dc2626;
+    --color-green-500: #059669;
+    --color-yellow-400: #f59e0b;
+    --color-yellow-500: #d97706;
+    --color-blue-600: #2563eb;
+    --color-orange-500: #ea580c;
+    --color-purple-500: #9333ea;
+
+    /* Serif voice for the shared shell brand */
+    --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
 }
 
 @layer base {

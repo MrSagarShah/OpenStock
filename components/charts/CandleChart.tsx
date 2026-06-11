@@ -34,11 +34,11 @@ export default function CandleChart({ candles, height = 500, title }: CandleChar
         });
 
         const candleSeries = chart.addSeries(CandlestickSeries, {
-            upColor: '#0FEDBE',
+            upColor: '#059669',
             downColor: '#ef4444',
-            borderUpColor: '#0FEDBE',
+            borderUpColor: '#059669',
             borderDownColor: '#ef4444',
-            wickUpColor: '#0FEDBE',
+            wickUpColor: '#059669',
             wickDownColor: '#ef4444',
         });
 
@@ -84,7 +84,7 @@ export default function CandleChart({ candles, height = 500, title }: CandleChar
     }, [candles, height]);
 
     return (
-        <div className="w-full rounded-xl border border-white/10 bg-black/40 p-4 backdrop-blur-md">
+        <div className="w-full rounded-xl border border-black/10 bg-white/70 p-4 backdrop-blur-md">
             {title && <h3 className="mb-3 text-lg font-semibold text-gray-100">{title}</h3>}
             {!hasData ? (
                 <div

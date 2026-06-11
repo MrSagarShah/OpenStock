@@ -18,6 +18,7 @@ services:
       - "traefik.http.routers.openstock.tls=true"
       - "traefik.http.routers.openstock.tls.certresolver=letsencrypt"
       - "traefik.http.services.openstock.loadbalancer.server.port=3000"
+      - "traefik.http.routers.openstock.middlewares=authentik@file"
 
   mongodb:
     image: mongo:7

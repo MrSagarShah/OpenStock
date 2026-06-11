@@ -32,7 +32,7 @@ export default function LineAreaChart({ candles, height = 400, title }: LineArea
         });
 
         const series = chart.addSeries(AreaSeries, {
-            lineColor: '#0FEDBE',
+            lineColor: '#059669',
             topColor: 'rgba(15, 237, 190, 0.35)',
             bottomColor: 'rgba(15, 237, 190, 0)',
             lineWidth: 2,
@@ -61,7 +61,7 @@ export default function LineAreaChart({ candles, height = 400, title }: LineArea
     }, [candles, height]);
 
     return (
-        <div className="w-full rounded-xl border border-white/10 bg-black/40 p-4 backdrop-blur-md">
+        <div className="w-full rounded-xl border border-black/10 bg-white/70 p-4 backdrop-blur-md">
             {title && <h3 className="mb-3 text-lg font-semibold text-gray-100">{title}</h3>}
             {candles.length === 0 ? (
                 <div className="flex items-center justify-center text-sm text-gray-400" style={{ height }}>

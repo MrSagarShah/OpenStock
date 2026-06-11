@@ -11,7 +11,7 @@ export default function SirayBanner() {
     if (!isVisible) return null;
 
     return (
-        <div className="bg-gradient-to-r from-teal-900/40 to-black border-b border-teal-900/30 px-4 py-2 relative">
+        <div className="bg-gradient-to-r from-teal-900/40 to-white border-b border-teal-900/30 px-4 py-2 relative">
             <div className="max-w-7xl mx-auto flex items-center justify-between text-sm">
                 <div className="flex items-center gap-3">
                     <Link href="https://www.siray.ai/" target="_blank" className="flex items-center gap-2 hover:opacity-80 transition-opacity">

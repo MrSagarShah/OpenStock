@@ -59,9 +59,9 @@ End with one sentence describing what a cautious investor should watch next. Pla
 export default async function AIInsight({ symbol }: { symbol: string }) {
     if (!hasAIKey()) {
         return (
-            <div className="rounded-xl border border-white/10 bg-black/40 p-5 backdrop-blur-md">
+            <div className="rounded-xl border border-black/10 bg-white/70 p-5 backdrop-blur-md">
                 <div className="mb-3 flex items-center gap-2">
-                    <Sparkles size={18} className="text-[#0FEDBE]" />
+                    <Sparkles size={18} className="text-[#059669]" />
                     <h3 className="text-lg font-semibold text-gray-100">AI Insight</h3>
                 </div>
                 <p className="text-sm text-gray-400">
@@ -74,9 +74,9 @@ export default async function AIInsight({ symbol }: { symbol: string }) {
     const text = await generateInsight(symbol);
 
     return (
-        <div className="rounded-xl border border-[#0FEDBE]/20 bg-gradient-to-br from-black/50 to-[#0FEDBE]/5 p-5 backdrop-blur-md">
+        <div className="rounded-xl border border-[#059669]/20 bg-gradient-to-br from-white/70 to-[#059669]/5 p-5 backdrop-blur-md">
             <div className="mb-3 flex items-center gap-2">
-                <Sparkles size={18} className="text-[#0FEDBE]" />
+                <Sparkles size={18} className="text-[#059669]" />
                 <h3 className="text-lg font-semibold text-gray-100">AI Insight</h3>
             </div>
             {text ? (
@@ -84,7 +84,7 @@ export default async function AIInsight({ symbol }: { symbol: string }) {
             ) : (
                 <p className="text-sm text-gray-400">AI summary temporarily unavailable.</p>
             )}
-            <p className="mt-3 border-t border-white/10 pt-3 text-xs text-gray-500">
+            <p className="mt-3 border-t border-black/10 pt-3 text-xs text-gray-500">
                 Generated from price data, technicals, and recent headlines. Not financial advice.
             </p>
         </div>

@@ -22,7 +22,7 @@ function rsi(values: number[], period = 14): number | null {
 
 function signal(label: string, value: string, tone: 'buy' | 'sell' | 'neutral') {
     const color =
-        tone === 'buy' ? 'text-[#0FEDBE]' : tone === 'sell' ? 'text-red-400' : 'text-gray-300';
+        tone === 'buy' ? 'text-[#059669]' : tone === 'sell' ? 'text-red-400' : 'text-gray-300';
     return (
         <div key={label} className="flex justify-between text-sm">
             <span className="text-gray-400">{label}</span>
@@ -43,7 +43,7 @@ export default async function TechnicalAnalysisCard({ symbol }: { symbol: string
     const rsi14 = rsi(closes, 14);
 
     return (
-        <div className="rounded-xl border border-white/10 bg-black/40 p-5 backdrop-blur-md">
+        <div className="rounded-xl border border-black/10 bg-white/70 p-5 backdrop-blur-md">
             <h3 className="mb-4 text-lg font-semibold text-gray-100">Technical Analysis</h3>
             {candles.length === 0 ? (
                 <p className="text-sm text-gray-400">Price history unavailable.</p>

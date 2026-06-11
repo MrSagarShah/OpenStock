@@ -49,7 +49,7 @@ export default async function Heatmap() {
     quotes.forEach((q) => (bySymbol[q.symbol] = q));
 
     return (
-        <div className="rounded-xl border border-white/10 bg-black/40 p-5 backdrop-blur-md">
+        <div className="rounded-xl border border-black/10 bg-white/70 p-5 backdrop-blur-md">
             <div className="mb-4 flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-gray-100">Market Heatmap</h3>
                 <div className="flex items-center gap-3 text-xs text-gray-400">

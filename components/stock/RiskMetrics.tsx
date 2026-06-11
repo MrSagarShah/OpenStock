@@ -22,7 +22,7 @@ export default async function RiskMetrics({ symbol }: { symbol: string }) {
     const pos = r.rangePosition ?? 0;
 
     return (
-        <div className="rounded-xl border border-white/10 bg-black/40 p-5 backdrop-blur-md">
+        <div className="rounded-xl border border-black/10 bg-white/70 p-5 backdrop-blur-md">
             <h3 className="mb-4 text-lg font-semibold text-gray-100">Risk & Range</h3>
 
             <div className="grid grid-cols-2 gap-4 text-sm">
@@ -39,7 +39,7 @@ export default async function RiskMetrics({ symbol }: { symbol: string }) {
                 </div>
                 <div>
                     <div className="text-xs text-gray-400">1Y Return</div>
-                    <div className={`text-lg font-semibold ${(r.yearReturn ?? 0) >= 0 ? 'text-[#0FEDBE]' : 'text-red-400'}`}>
+                    <div className={`text-lg font-semibold ${(r.yearReturn ?? 0) >= 0 ? 'text-[#059669]' : 'text-red-400'}`}>
                         {(r.yearReturn ?? 0) >= 0 ? '+' : ''}{fmt(r.yearReturn, '%')}
                     </div>
                 </div>
@@ -56,13 +56,13 @@ export default async function RiskMetrics({ symbol }: { symbol: string }) {
                 </div>
                 <div className="relative h-2 rounded-full bg-white/5">
                     <div
-                        className="absolute top-0 h-2 w-1 rounded-full bg-[#0FEDBE] shadow-[0_0_10px_#0FEDBE]"
+                        className="absolute top-0 h-2 w-1 rounded-full bg-[#059669] shadow-[0_0_10px_#059669]"
                         style={{ left: `calc(${Math.max(0, Math.min(100, pos))}% - 2px)` }}
                     />
                 </div>
             </div>
 
-            <p className="mt-4 border-t border-white/10 pt-3 text-xs text-gray-500">
+            <p className="mt-4 border-t border-black/10 pt-3 text-xs text-gray-500">
                 Volatility is the annualized standard deviation of daily returns.
             </p>
         </div>

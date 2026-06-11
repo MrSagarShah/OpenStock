@@ -9,10 +9,10 @@ export default function AboutPage() {
     return (
         <div className="mx-auto max-w-3xl py-12 text-gray-200">
             <div className="mb-8 flex items-center gap-3">
-                <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#0FEDBE] text-gray-900 font-black text-xl">GT</span>
+                <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#059669] text-gray-900 font-black text-xl">GT</span>
                 <div>
                     <h1 className="text-3xl font-bold">Good Thoughts Stocks</h1>
-                    <p className="text-sm text-[#0FEDBE]">A Good Thoughts product</p>
+                    <p className="text-sm text-[#059669]">A Good Thoughts product</p>
                 </div>
             </div>
 
@@ -22,7 +22,7 @@ export default function AboutPage() {
 
             <p className="mb-4 text-gray-300">
                 For Indian listed companies (NSE/BSE), visit our companion product{' '}
-                <a href="https://financial.goodthoughts.in" className="text-[#0FEDBE] hover:underline">
+                <a href="https://financial.goodthoughts.in" className="text-[#059669] hover:underline">
                     Good Thoughts Financial
                 </a>
                 . Together they cover the two markets most of our users care about.

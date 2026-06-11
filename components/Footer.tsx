@@ -7,15 +7,15 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="col-span-1 md:col-span-2">
                         <Link href="/" className="flex items-center gap-2 mb-4">
-                            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0FEDBE] text-gray-900 font-black text-lg">GT</span>
+                            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#059669] text-gray-900 font-black text-lg">GT</span>
                             <span className="flex flex-col leading-tight">
                                 <span className="text-lg font-bold text-gray-100">Good Thoughts</span>
-                                <span className="text-xs font-medium tracking-widest text-[#0FEDBE] uppercase">Stocks</span>
+                                <span className="text-xs font-medium tracking-widest text-[#059669] uppercase">Stocks</span>
                             </span>
                         </Link>
                         <p className="text-gray-400 mb-6 max-w-md">
                             Good Thoughts Stocks — track US market prices, explore charts and technicals, and manage your watchlist. For Indian markets, visit{' '}
-                            <a href="https://financial.goodthoughts.in" className="text-[#0FEDBE] hover:underline">Good Thoughts Financial</a>.
+                            <a href="https://financial.goodthoughts.in" className="text-[#059669] hover:underline">Good Thoughts Financial</a>.
                         </p>
                     </div>
 
