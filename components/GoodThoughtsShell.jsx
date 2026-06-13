@@ -42,7 +42,7 @@ const SECTIONS = [
 const SERIF = { fontFamily: "var(--font-lora), 'Lora', Georgia, 'Times New Roman', serif" }
 const PRIMARY = '#004532'
 const PRIMARY_CONTAINER = '#065f46'
-const ON_SURFACE_VARIANT = '#3f4944'
+const ON_SURFACE_VARIANT = '#2a3346'
 const AUTH_STORAGE_KEY = 'gt-auth'
 
 function initials(name) {
@@ -141,8 +141,8 @@ export default function GoodThoughtsShell({ current = 'finance', user = null, on
             <a
               href="/auth"
               onClick={onSignIn ? (e) => { e.preventDefault(); onSignIn(e) } : undefined}
-              className="text-xs tracking-wider uppercase font-semibold transition-colors px-3 py-1.5 rounded-lg hover:bg-emerald-100/60"
-              style={{ color: PRIMARY }}
+              className="text-sm tracking-wider uppercase font-bold transition-opacity px-4 py-2.5 rounded-lg text-white hover:opacity-90"
+              style={{ backgroundColor: PRIMARY }}
             >
               Sign in
             </a>

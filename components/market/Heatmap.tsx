@@ -36,7 +36,7 @@ function Tile({ q }: { q: YahooQuote }) {
                     {up ? '+' : ''}
                     {q.changePercent.toFixed(2)}%
                 </div>
-                <div className="text-[10px] text-white/70">${q.price.toFixed(2)}</div>
+                <div className="text-xs text-white/70">${q.price.toFixed(2)}</div>
             </div>
         </Link>
     );
