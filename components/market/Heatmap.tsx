@@ -10,33 +10,39 @@ const SECTORS: Record<string, string[]> = {
     Industrial: ['BA', 'CAT', 'GE', 'HON', 'UPS'],
 };
 
-function colorFor(pct: number): string {
+// Returns the tile fill plus whether its text should be dark. Tiles are painted
+// over a light (bg-white/70) card, so a low-magnitude move yields a low-alpha,
+// near-white fill — white text on it was effectively invisible. Pick dark text
+// whenever the fill is pale (alpha below the legibility threshold).
+function tileStyle(pct: number): { bg: string; darkText: boolean } {
     const capped = Math.max(-5, Math.min(5, pct));
-    if (capped === 0) return 'rgba(107, 114, 128, 0.4)';
-    if (capped > 0) {
-        const a = Math.min(0.85, 0.2 + capped / 5 * 0.65);
-        return `rgba(15, 237, 190, ${a.toFixed(2)})`;
-    }
+    if (capped === 0) return { bg: 'rgba(107, 114, 128, 0.4)', darkText: true };
     const a = Math.min(0.85, 0.2 + Math.abs(capped) / 5 * 0.65);
-    return `rgba(239, 68, 68, ${a.toFixed(2)})`;
+    // teal-green positive / red negative, deepened toward the brand emerald
+    const bg = capped > 0 ? `rgba(6, 148, 112, ${a.toFixed(2)})` : `rgba(220, 38, 38, ${a.toFixed(2)})`;
+    return { bg, darkText: a < 0.55 };
 }
 
 function Tile({ q }: { q: YahooQuote }) {
     const up = q.change >= 0;
+    const { bg, darkText } = tileStyle(q.changePercent);
+    const sym = darkText ? 'text-slate-900' : 'text-white drop-shadow';
+    const pctText = darkText ? 'text-slate-800' : 'text-white/90';
+    const priceText = darkText ? 'text-slate-700' : 'text-white/80';
     return (
         <Link
             href={`/stocks/${q.symbol}`}
             className="flex flex-col justify-between rounded-lg p-3 transition-transform hover:scale-[1.03]"
-            style={{ backgroundColor: colorFor(q.changePercent), minHeight: 88 }}
+            style={{ backgroundColor: bg, minHeight: 88 }}
             title={`${q.name} — ${q.price.toFixed(2)} (${up ? '+' : ''}${q.changePercent.toFixed(2)}%)`}
         >
-            <span className="text-sm font-bold text-white drop-shadow">{q.symbol}</span>
+            <span className={`text-sm font-bold ${sym}`}>{q.symbol}</span>
             <div className="text-right">
-                <div className="text-xs font-medium text-white/90">
+                <div className={`text-xs font-semibold ${pctText}`}>
                     {up ? '+' : ''}
                     {q.changePercent.toFixed(2)}%
                 </div>
-                <div className="text-xs text-white/70">${q.price.toFixed(2)}</div>
+                <div className={`text-xs ${priceText}`}>${q.price.toFixed(2)}</div>
             </div>
         </Link>
     );
@@ -51,17 +57,17 @@ export default async function Heatmap() {
     return (
         <div className="rounded-xl border border-black/10 bg-white/70 p-5 backdrop-blur-md">
             <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-gray-100">Market Heatmap</h3>
-                <div className="flex items-center gap-3 text-xs text-gray-400">
+                <h3 className="text-lg font-semibold text-slate-900">Market Heatmap</h3>
+                <div className="flex items-center gap-3 text-xs text-slate-600">
                     <span className="flex items-center gap-1">
-                        <span className="h-3 w-3 rounded" style={{ background: 'rgba(239,68,68,0.8)' }} />
+                        <span className="h-3 w-3 rounded" style={{ background: 'rgba(220,38,38,0.8)' }} />
                         −5%
                     </span>
                     <span className="flex items-center gap-1">
                         <span className="h-3 w-3 rounded bg-gray-500/40" />0
                     </span>
                     <span className="flex items-center gap-1">
-                        <span className="h-3 w-3 rounded" style={{ background: 'rgba(15,237,190,0.8)' }} />
+                        <span className="h-3 w-3 rounded" style={{ background: 'rgba(6,148,112,0.85)' }} />
                         +5%
                     </span>
                 </div>
@@ -73,7 +79,7 @@ export default async function Heatmap() {
                     if (tiles.length === 0) return null;
                     return (
                         <div key={sector}>
-                            <h4 className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">
+                            <h4 className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
                                 {sector}
                             </h4>
                             <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
