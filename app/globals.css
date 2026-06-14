@@ -51,7 +51,7 @@
     --card-foreground: oklch(0.129 0.042 264.695);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.129 0.042 264.695);
-    --primary: oklch(0.208 0.042 265.755);
+    --primary: oklch(0.35 0.07 167);   /* Good Thoughts green #004532 (was navy) */
     --primary-foreground: oklch(0.984 0.003 247.858);
     --secondary: oklch(0.968 0.007 247.896);
     --secondary-foreground: oklch(0.208 0.042 265.755);
@@ -70,7 +70,7 @@
     --chart-5: oklch(0.769 0.188 70.08);
     --sidebar: oklch(0.984 0.003 247.858);
     --sidebar-foreground: oklch(0.129 0.042 264.695);
-    --sidebar-primary: oklch(0.208 0.042 265.755);
+    --sidebar-primary: oklch(0.35 0.07 167);   /* Good Thoughts green (was navy) */
     --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
     --sidebar-accent: oklch(0.968 0.007 247.896);
     --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
@@ -132,12 +132,14 @@
     --color-gray-100: #0d1117;   /* headings (darkest) */
     --color-gray-50:  #f8faf5;
 
-    /* Accent: teal -> Good Thoughts green (emerald family toward #004532) */
+    /* Accent: teal -> Good Thoughts green. Anchored on the shell brand #004532 so
+       buttons/accents match the shared shell's Sign-in exactly (no brighter
+       #059669). Ramp: 400 = lighter hover, 500 = brand, 600 = pressed. */
     --color-teal-100: #d1fae5;
-    --color-teal-300: #34d399;
-    --color-teal-400: #10b981;
-    --color-teal-500: #059669;   /* buttons / primary accent (27 uses) */
-    --color-teal-600: #047857;
+    --color-teal-300: #6ee7b7;
+    --color-teal-400: #0a7a59;   /* hover (a touch lighter than brand) */
+    --color-teal-500: #004532;   /* buttons / primary accent -> shell brand green */
+    --color-teal-600: #00321f;   /* pressed / darker */
     --color-teal-800: #065f46;
     --color-teal-900: #004532;   /* brand deep green */
 

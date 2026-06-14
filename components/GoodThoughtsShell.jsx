@@ -34,9 +34,9 @@ import { useState, useEffect } from 'react'
 const SECTIONS = [
   { key: 'finance', label: 'Finance', href: '/' },
   { key: 'markets', label: 'Markets', href: '/markets' },
-  { key: 'ipo', label: 'IPO', href: '/ipo' },
-  { key: 'blog', label: 'Blog', href: '/blog' },
-  { key: 'monitor', label: 'Monitor', href: '/monitor' },
+  { key: 'ipo', label: 'IPO', href: '/ipo/' },
+  { key: 'blog', label: 'Blog', href: '/blog/' },
+  { key: 'monitor', label: 'Monitor', href: '/monitor/' },
 ]
 
 const SERIF = { fontFamily: "var(--font-lora), 'Lora', Georgia, 'Times New Roman', serif" }
