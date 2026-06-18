@@ -134,7 +134,7 @@
 
     /* Accent: teal -> Good Thoughts green. Anchored on the shell brand #004532 so
        buttons/accents match the shared shell's Sign-in exactly (no brighter
-       #059669). Ramp: 400 = lighter hover, 500 = brand, 600 = pressed. */
+       #065f46). Ramp: 400 = lighter hover, 500 = brand, 600 = pressed. */
     --color-teal-100: #d1fae5;
     --color-teal-300: #6ee7b7;
     --color-teal-400: #0a7a59;   /* hover (a touch lighter than brand) */
@@ -146,7 +146,7 @@
     /* Status colors — kept vivid and readable on light */
     --color-red-400: #ef4444;
     --color-red-500: #dc2626;
-    --color-green-500: #059669;
+    --color-green-500: #065f46;
     --color-yellow-400: #f59e0b;
     --color-yellow-500: #d97706;
     --color-blue-600: #2563eb;
@@ -163,7 +163,13 @@
     }
     body {
         @apply bg-gray-900 text-foreground;
+        font-family: var(--font-sans);
     }
+    h1, h2, h3 {
+        font-family: var(--font-serif);
+    }
+    /* Kill stray horizontal scroll on mobile (e.g. stock-page chart toolbar) without breaking sticky. */
+    html, body { overflow-x: clip; }
 }
 
 @layer utilities {

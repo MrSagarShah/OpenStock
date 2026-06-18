@@ -34,11 +34,11 @@ export default function CandleChart({ candles, height = 500, title }: CandleChar
         });
 
         const candleSeries = chart.addSeries(CandlestickSeries, {
-            upColor: '#059669',
+            upColor: '#065f46',
             downColor: '#ef4444',
-            borderUpColor: '#059669',
+            borderUpColor: '#065f46',
             borderDownColor: '#ef4444',
-            wickUpColor: '#059669',
+            wickUpColor: '#065f46',
             wickDownColor: '#ef4444',
         });
 

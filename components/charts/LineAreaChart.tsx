@@ -32,7 +32,7 @@ export default function LineAreaChart({ candles, height = 400, title }: LineArea
         });
 
         const series = chart.addSeries(AreaSeries, {
-            lineColor: '#059669',
+            lineColor: '#065f46',
             topColor: 'rgba(15, 237, 190, 0.35)',
             bottomColor: 'rgba(15, 237, 190, 0)',
             lineWidth: 2,

@@ -35,7 +35,7 @@ export default async function QuoteList({ title, symbols }: QuoteListProps) {
                                         {row.currency === 'USD' ? '$' : ''}
                                         {row.price.toFixed(2)}
                                     </div>
-                                    <div className={`text-sm ${up ? 'text-[#059669]' : 'text-red-400'}`}>
+                                    <div className={`text-sm ${up ? 'text-[#065f46]' : 'text-red-400'}`}>
                                         {up ? '+' : ''}
                                         {row.changePercent.toFixed(2)}%
                                     </div>

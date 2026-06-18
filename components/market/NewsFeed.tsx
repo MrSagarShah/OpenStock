@@ -30,7 +30,7 @@ export default async function NewsFeed({ symbols, title = 'Top Stories' }: { sym
                                     href={a.url}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="line-clamp-2 text-sm font-medium text-gray-100 hover:text-[#059669]"
+                                    className="line-clamp-2 text-sm font-medium text-gray-100 hover:text-[#065f46]"
                                 >
                                     {a.headline}
                                 </a>

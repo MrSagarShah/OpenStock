@@ -74,6 +74,63 @@ function signOut() {
   window.location.reload()
 }
 
+// --- Shared market ticker: ONE managed source for every section --------------
+// Same-origin fetch of the Finance market feed (/api/v1/market/ticker, reachable
+// from any path on the unified host). Dependency-free (no react-query, no host
+// CSS) so it renders identically in finance, markets, ipo, blog and the plain
+// shell. Rendered just below the nav => always sits ABOVE each section sub-nav.
+function GTTickerItem({ it }) {
+  const pos = (it.change_percent ?? 0) >= 0
+  const price = it.price != null ? Number(it.price).toLocaleString('en-IN', { maximumFractionDigits: 2 }) : '-'
+  const pct = it.change_percent != null ? `${it.change_percent > 0 ? '+' : ''}${Number(it.change_percent).toFixed(2)}%` : ''
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '0 16px', whiteSpace: 'nowrap' }}>
+      <span style={{ color: '#9fb4ab', fontWeight: 500, fontSize: 12 }}>{(it.symbol && it.symbol.startsWith('^')) ? it.name : it.symbol}</span>
+      <span style={{ color: '#fff', fontWeight: 600, fontSize: 12 }}>{price}</span>
+      {pct ? <span style={{ color: pos ? '#34d399' : '#f87171', fontWeight: 500, fontSize: 12 }}>{pos ? '▲' : '▼'} {pct}</span> : null}
+    </span>
+  )
+}
+
+function gtMarketOpen() {
+  const now = new Date()
+  const ist = now.getUTCHours() * 60 + now.getUTCMinutes() + 330
+  const day = (now.getUTCDay() + Math.floor(ist / 1440)) % 7
+  const m = ((ist % 1440) + 1440) % 1440
+  if (day === 0 || day === 6) return false
+  return m >= 555 && m <= 930
+}
+
+function ProductTicker() {
+  const [items, setItems] = useState([])
+  useEffect(() => {
+    let alive = true
+    const load = () => fetch('/api/v1/market/ticker')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (alive && d) setItems([...(d.indices || []), ...(d.stocks || [])]) })
+      .catch(() => {})
+    load()
+    const id = setInterval(load, 10000)
+    return () => { alive = false; clearInterval(id) }
+  }, [])
+  if (!items.length) return null
+  const doubled = [...items, ...items]
+  const live = gtMarketOpen()
+  const dur = Math.max(30, items.length * 3.5)
+  return (
+    <div style={{ position: 'relative', overflow: 'hidden', height: 32, background: '#022a20', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <style>{`@keyframes gtTickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}`}</style>
+      <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, zIndex: 10, display: 'flex', alignItems: 'center', gap: 6, padding: '0 12px', background: '#022a20', borderRight: '1px solid rgba(255,255,255,0.1)' }}>
+        <span style={{ width: 8, height: 8, borderRadius: 9999, background: live ? '#22c55e' : '#ef4444', display: 'inline-block' }} />
+        <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.08em', color: '#cbd5d3' }}>{live ? 'LIVE' : 'CLOSED'}</span>
+      </div>
+      <div style={{ display: 'inline-flex', alignItems: 'center', height: '100%', width: 'max-content', animation: `gtTickerScroll ${dur}s linear infinite` }}>
+        {doubled.map((it, i) => <GTTickerItem key={`${it.symbol}-${i}`} it={it} />)}
+      </div>
+    </div>
+  )
+}
+
 export default function GoodThoughtsShell({ current = 'finance', user = null, onSignIn }) {
   // Start with the prop (or null) so server and first client render match (avoids
   // hydration mismatch); fill in the session-derived account after mount.
@@ -149,6 +206,7 @@ export default function GoodThoughtsShell({ current = 'finance', user = null, on
           )}
         </div>
       </div>
+      <ProductTicker />
     </nav>
   )
 }

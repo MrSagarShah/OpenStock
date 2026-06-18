@@ -29,7 +29,7 @@ export default async function StockNews({ symbol }: { symbol: string }) {
                                 href={a.link}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="block text-sm font-medium text-gray-100 hover:text-[#059669]"
+                                className="block text-sm font-medium text-gray-100 hover:text-[#065f46]"
                             >
                                 {a.title}
                             </a>

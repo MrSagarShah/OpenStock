@@ -61,7 +61,7 @@ export default async function AIInsight({ symbol }: { symbol: string }) {
         return (
             <div className="rounded-xl border border-black/10 bg-white/70 p-5 backdrop-blur-md">
                 <div className="mb-3 flex items-center gap-2">
-                    <Sparkles size={18} className="text-[#059669]" />
+                    <Sparkles size={18} className="text-[#065f46]" />
                     <h3 className="text-lg font-semibold text-gray-100">AI Insight</h3>
                 </div>
                 <p className="text-sm text-gray-400">
@@ -74,9 +74,9 @@ export default async function AIInsight({ symbol }: { symbol: string }) {
     const text = await generateInsight(symbol);
 
     return (
-        <div className="rounded-xl border border-[#059669]/20 bg-gradient-to-br from-white/70 to-[#059669]/5 p-5 backdrop-blur-md">
+        <div className="rounded-xl border border-[#065f46]/20 bg-gradient-to-br from-white/70 to-[#065f46]/5 p-5 backdrop-blur-md">
             <div className="mb-3 flex items-center gap-2">
-                <Sparkles size={18} className="text-[#059669]" />
+                <Sparkles size={18} className="text-[#065f46]" />
                 <h3 className="text-lg font-semibold text-gray-100">AI Insight</h3>
             </div>
             {text ? (

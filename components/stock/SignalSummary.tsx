@@ -16,14 +16,14 @@ export default async function SignalSummary({ symbol }: { symbol: string }) {
     const a = analyzeSignals(candles);
 
     const verdictTone =
-        a.label === 'Strong Buy' ? 'bg-[#059669] text-gray-900'
-        : a.label === 'Buy' ? 'bg-[#059669]/30 text-[#059669] border border-[#059669]/40'
+        a.label === 'Strong Buy' ? 'bg-[#065f46] text-gray-900'
+        : a.label === 'Buy' ? 'bg-[#065f46]/30 text-[#065f46] border border-[#065f46]/40'
         : a.label === 'Strong Sell' ? 'bg-red-500 text-white'
         : a.label === 'Sell' ? 'bg-red-500/30 text-red-300 border border-red-500/40'
         : 'bg-white/10 text-gray-200 border border-black/10';
 
     const dotColor = (v: 'bull' | 'bear' | 'neutral') =>
-        v === 'bull' ? 'bg-[#059669]' : v === 'bear' ? 'bg-red-400' : 'bg-gray-500';
+        v === 'bull' ? 'bg-[#065f46]' : v === 'bear' ? 'bg-red-400' : 'bg-gray-500';
 
     return (
         <div className="rounded-xl border border-black/10 bg-white/70 p-5 backdrop-blur-md">
@@ -36,7 +36,7 @@ export default async function SignalSummary({ symbol }: { symbol: string }) {
 
             <div className="mb-4 flex items-center gap-3 text-sm">
                 <div className="flex items-center gap-1.5">
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#059669]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#065f46]" />
                     <span className="text-gray-300">{a.bullish} bullish</span>
                 </div>
                 <div className="flex items-center gap-1.5">

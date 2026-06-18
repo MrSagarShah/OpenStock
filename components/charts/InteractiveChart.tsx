@@ -71,11 +71,11 @@ export default function InteractiveChart({ symbol, initialCandles, initialRange 
 
         if (type === 'candles') {
             const s = chart.addSeries(CandlestickSeries, {
-                upColor: '#059669',
+                upColor: '#065f46',
                 downColor: '#ef4444',
-                borderUpColor: '#059669',
+                borderUpColor: '#065f46',
                 borderDownColor: '#ef4444',
-                wickUpColor: '#059669',
+                wickUpColor: '#065f46',
                 wickDownColor: '#ef4444',
             });
             s.setData(
@@ -102,7 +102,7 @@ export default function InteractiveChart({ symbol, initialCandles, initialRange 
             );
         } else if (type === 'area') {
             const s = chart.addSeries(AreaSeries, {
-                lineColor: '#059669',
+                lineColor: '#065f46',
                 topColor: 'rgba(15, 237, 190, 0.35)',
                 bottomColor: 'rgba(15, 237, 190, 0)',
                 lineWidth: 2,
@@ -110,7 +110,7 @@ export default function InteractiveChart({ symbol, initialCandles, initialRange 
             s.setData(candles.map((c) => ({ time: c.time as UTCTimestamp, value: c.close })));
         } else {
             const s = chart.addSeries(LineSeries, {
-                color: '#059669',
+                color: '#065f46',
                 lineWidth: 2,
             });
             s.setData(candles.map((c) => ({ time: c.time as UTCTimestamp, value: c.close })));
@@ -165,7 +165,7 @@ export default function InteractiveChart({ symbol, initialCandles, initialRange 
                                 onClick={() => setType(t.key)}
                                 className={`px-3 py-1 text-xs font-medium transition-colors ${
                                     type === t.key
-                                        ? 'bg-[#059669] text-gray-900'
+                                        ? 'bg-[#065f46] text-gray-900'
                                         : 'text-gray-300 hover:bg-white/10'
                                 }`}
                             >
@@ -177,7 +177,7 @@ export default function InteractiveChart({ symbol, initialCandles, initialRange 
                         onClick={() => setShowSMA((v) => !v)}
                         className={`rounded-lg border border-black/10 px-3 py-1 text-xs font-medium transition-colors ${
                             showSMA
-                                ? 'bg-[#059669] text-gray-900'
+                                ? 'bg-[#065f46] text-gray-900'
                                 : 'bg-white/5 text-gray-300 hover:bg-white/10'
                         }`}
                         title="Toggle SMA 20 / 50 / 200 overlay"
@@ -192,7 +192,7 @@ export default function InteractiveChart({ symbol, initialCandles, initialRange 
                                 disabled={pending}
                                 className={`px-3 py-1 text-xs font-medium transition-colors ${
                                     range === r.key
-                                        ? 'bg-[#059669] text-gray-900'
+                                        ? 'bg-[#065f46] text-gray-900'
                                         : 'text-gray-300 hover:bg-white/10'
                                 } ${pending && range !== r.key ? 'opacity-50' : ''}`}
                             >

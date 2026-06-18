@@ -22,7 +22,7 @@ function rsi(values: number[], period = 14): number | null {
 
 function signal(label: string, value: string, tone: 'buy' | 'sell' | 'neutral') {
     const color =
-        tone === 'buy' ? 'text-[#059669]' : tone === 'sell' ? 'text-red-400' : 'text-gray-300';
+        tone === 'buy' ? 'text-[#065f46]' : tone === 'sell' ? 'text-red-400' : 'text-gray-300';
     return (
         <div key={label} className="flex justify-between text-sm">
             <span className="text-gray-400">{label}</span>

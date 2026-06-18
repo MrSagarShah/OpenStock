@@ -42,7 +42,7 @@ export default async function CompanyProfileCard({ symbol }: { symbol: string })
                     href={profile.weburl}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-4 inline-block text-sm text-[#059669] hover:underline"
+                    className="mt-4 inline-block text-sm text-[#065f46] hover:underline"
                 >
                     {profile.weburl}
                 </a>

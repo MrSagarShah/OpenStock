@@ -69,11 +69,11 @@ export default function WatchlistQuotes({ symbols }: { symbols: string[] }) {
                                     {row.currency === 'USD' ? '$' : ''}
                                     {row.price.toFixed(2)}
                                 </td>
-                                <td className={`px-4 py-3 text-right ${up ? 'text-[#059669]' : 'text-red-400'}`}>
+                                <td className={`px-4 py-3 text-right ${up ? 'text-[#065f46]' : 'text-red-400'}`}>
                                     {up ? '+' : ''}
                                     {row.change.toFixed(2)}
                                 </td>
-                                <td className={`px-4 py-3 text-right ${up ? 'text-[#059669]' : 'text-red-400'}`}>
+                                <td className={`px-4 py-3 text-right ${up ? 'text-[#065f46]' : 'text-red-400'}`}>
                                     {up ? '+' : ''}
                                     {row.changePercent.toFixed(2)}%
                                 </td>

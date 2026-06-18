@@ -30,7 +30,7 @@ export default async function SymbolInfo({ symbol }: { symbol: string }) {
                     <div className="text-3xl font-bold text-gray-100">
                         {fmtPrice(q?.price, q?.currency)}
                     </div>
-                    <div className={up ? 'text-[#059669]' : 'text-red-400'}>
+                    <div className={up ? 'text-[#065f46]' : 'text-red-400'}>
                         {up ? '+' : ''}
                         {q?.change != null ? q.change.toFixed(2) : '—'} ({up ? '+' : ''}
                         {q?.changePercent != null ? q.changePercent.toFixed(2) : '—'}%)
