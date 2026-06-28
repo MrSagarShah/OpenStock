@@ -1,6 +1,7 @@
 "use client";
-import React, { useMemo, useState } from "react";
-import { addToWatchlist, removeFromWatchlist } from "@/lib/actions/watchlist.actions";
+import React, { useEffect, useMemo, useState } from "react";
+import { addToWatchlist, removeFromWatchlist, isStockInWatchlist } from "@/lib/actions/watchlist.actions";
+import { readSharedSession, sharedLoginUrl } from "@/lib/shared-session";
 import { toast } from "sonner";
 
 interface WatchlistButtonProps {
@@ -24,6 +25,18 @@ const WatchlistButton = ({
 }: WatchlistButtonProps) => {
     const [added, setAdded] = useState<boolean>(!!isInWatchlist);
     const [loading, setLoading] = useState(false);
+    // The watchlist key. Prefer an explicit prop (the watchlist page already
+    // knows the email); otherwise resolve it from the SHARED login session.
+    const [resolvedUserId, setResolvedUserId] = useState<string | undefined>(userId);
+
+    useEffect(() => {
+        if (userId) { setResolvedUserId(userId); return; }
+        const sess = readSharedSession();
+        if (!sess?.email) return;
+        setResolvedUserId(sess.email);
+        // No server-rendered membership state here — check it client-side.
+        isStockInWatchlist(sess.email, symbol).then((v) => setAdded(!!v)).catch(() => {});
+    }, [userId, symbol]);
 
     const label = useMemo(() => {
         if (type === "icon") return added ? "" : "";
@@ -33,9 +46,9 @@ const WatchlistButton = ({
     const handleClick = async (e: React.MouseEvent) => {
         e.preventDefault(); // Prevent link navigation if inside a link
 
-        if (!userId && !onWatchlistChange) {
-            console.error("WatchlistButton: userId or onWatchlistChange is required");
-            toast.error("Please sign in to modify watchlist");
+        if (!resolvedUserId && !onWatchlistChange) {
+            toast.error("Please sign in to modify your watchlist");
+            window.location.assign(sharedLoginUrl("/markets"));
             return;
         }
 
@@ -44,12 +57,12 @@ const WatchlistButton = ({
         setLoading(true);
 
         try {
-            if (userId) {
+            if (resolvedUserId) {
                 if (next) {
-                    await addToWatchlist(userId, symbol, company);
+                    await addToWatchlist(resolvedUserId, symbol, company);
                     toast.success(`${symbol} added to watchlist`);
                 } else {
-                    await removeFromWatchlist(userId, symbol);
+                    await removeFromWatchlist(resolvedUserId, symbol);
                     toast.success(`${symbol} removed from watchlist`);
                 }
             }

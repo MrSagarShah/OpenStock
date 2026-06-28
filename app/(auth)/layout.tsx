@@ -1,13 +1,9 @@
 import Link from "next/link";
 import React from "react";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-import { auth } from "@/lib/better-auth/auth";
 
+// These legacy openstock auth pages just redirect to the shared /auth; no
+// better-auth session lookup here anymore.
 const Layout = async ({ children }: { children: React.ReactNode }) => {
-    const session = await auth.api.getSession({ headers: await headers() });
-
-    if (session?.user) redirect('/')
     return (
         <main className="auth-layout">
             <section className="auth-left-section scrollbar-hide-default">

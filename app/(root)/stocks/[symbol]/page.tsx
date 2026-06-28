@@ -8,20 +8,13 @@ import StockNews from "@/components/stock/StockNews";
 import InteractiveChart from "@/components/charts/InteractiveChart";
 import { getCandles } from "@/lib/actions/yahoo.actions";
 
-import { auth } from '@/lib/better-auth/auth';
-import { headers } from 'next/headers';
-import { isStockInWatchlist } from '@/lib/actions/watchlist.actions';
-
 export default async function StockDetails({ params }: StockDetailsPageProps) {
     const { symbol } = await params;
     const upper = symbol.toUpperCase();
 
-    const [session, candleData] = await Promise.all([
-        auth.api.getSession({ headers: await headers() }),
-        getCandles(upper, '1y', '1d'),
-    ]);
-    const userId = session?.user?.id;
-    const isInWatchlist = userId ? await isStockInWatchlist(userId, symbol) : false;
+    // No server-side session (the shared login lives in localStorage). The
+    // WatchlistButton resolves the logged-in user and membership client-side.
+    const candleData = await getCandles(upper, '1y', '1d');
     const candles = candleData?.candles ?? [];
 
     return (
@@ -39,8 +32,7 @@ export default async function StockDetails({ params }: StockDetailsPageProps) {
                         <WatchlistButton
                             symbol={upper}
                             company={upper}
-                            isInWatchlist={isInWatchlist}
-                            userId={userId}
+                            isInWatchlist={false}
                         />
                     </div>
                     <SignalSummary symbol={upper} />

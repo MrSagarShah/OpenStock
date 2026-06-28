@@ -1,22 +1,13 @@
 import Header from "@/components/Header";
-import { auth } from "@/lib/better-auth/auth";
-import { headers } from "next/headers";
 import Footer from "@/components/Footer";
 
+// Identity comes from the shared <GoodThoughtsShell> nav, which self-reads the
+// shared login session (localStorage 'gt-auth') client-side. No server-side
+// auth lookup here — Markets no longer runs its own better-auth session.
 const Layout = async ({ children }: { children: React.ReactNode }) => {
-    const session = await auth.api.getSession({ headers: await headers() });
-
-    const user = session?.user
-        ? {
-              id: session.user.id,
-              name: session.user.name,
-              email: session.user.email,
-          }
-        : null;
-
     return (
         <main className="min-h-screen text-gray-400">
-            <Header user={user} />
+            <Header user={null} />
 
             <div className="container py-10">
                 {children}

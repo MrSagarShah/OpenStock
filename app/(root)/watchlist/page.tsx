@@ -1,7 +1,6 @@
-import React, { Suspense } from 'react';
-import { auth } from '@/lib/better-auth/auth';
-import { headers } from 'next/headers';
-import { redirect } from 'next/navigation';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import { getUserWatchlist } from '@/lib/actions/watchlist.actions';
 import { getUserAlerts } from '@/lib/actions/alert.actions';
 import { getNews } from '@/lib/actions/finnhub.actions';
@@ -10,29 +9,51 @@ import AlertsPanel from '@/components/watchlist/AlertsPanel';
 import NewsGrid from '@/components/watchlist/NewsGrid';
 import SearchCommand from '@/components/SearchCommand';
 import { Loader2 } from 'lucide-react';
+import { readSharedSession, sharedLoginUrl } from '@/lib/shared-session';
 
-export default async function WatchlistPage() {
-    const session = await auth.api.getSession({
-        headers: await headers()
-    });
+// Gated on the SHARED login session (localStorage 'gt-auth'), not better-auth.
+// The session is client-only, so this page resolves the user in the browser,
+// bounces logged-out visitors to the shared /auth, and loads the watchlist
+// keyed by EMAIL (the stable identity across the platform).
+export default function WatchlistPage() {
+    const [status, setStatus] = useState<'checking' | 'ready'>('checking');
+    const [email, setEmail] = useState<string>('');
+    const [watchlistItems, setWatchlistItems] = useState<any[]>([]);
+    const [alerts, setAlerts] = useState<any[]>([]);
+    const [news, setNews] = useState<any[]>([]);
 
-    if (!session) {
-        redirect('/sign-in');
+    useEffect(() => {
+        const sess = readSharedSession();
+        if (!sess?.email) {
+            window.location.assign(sharedLoginUrl('/markets/watchlist'));
+            return;
+        }
+        let active = true;
+        (async () => {
+            const [items, userAlerts, initialNews] = await Promise.all([
+                getUserWatchlist(sess.email),
+                getUserAlerts(sess.email),
+                getNews(),
+            ]);
+            const symbols = items.map((item: any) => item.symbol);
+            const relevantNews = symbols.length > 0 ? await getNews(symbols) : initialNews;
+            if (!active) return;
+            setEmail(sess.email);
+            setWatchlistItems(items);
+            setAlerts(userAlerts);
+            setNews(relevantNews || []);
+            setStatus('ready');
+        })();
+        return () => { active = false; };
+    }, []);
+
+    if (status === 'checking') {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <Loader2 className="animate-spin text-gray-500" />
+            </div>
+        );
     }
-
-    const userId = session.user.id;
-
-    // Parallel data fetching
-    const [watchlistItems, alerts, news] = await Promise.all([
-        getUserWatchlist(userId),
-        getUserAlerts(userId),
-        getNews() // Initial news fetch
-    ]);
-
-    const watchlistSymbols = watchlistItems.map((item: any) => item.symbol);
-
-    // Fallback news if watchlist has items
-    const relevantNews = watchlistSymbols.length > 0 ? await getNews(watchlistSymbols) : news;
 
     return (
         <div className="min-h-screen bg-black text-gray-100 p-6 md:p-8">
@@ -53,13 +74,11 @@ export default async function WatchlistPage() {
                 {/* Main Content - Watchlist Table */}
                 <div className="lg:col-span-3 space-y-8">
                     <div className="space-y-6">
-                        <WatchlistManager initialItems={watchlistItems} userId={userId} />
+                        <WatchlistManager initialItems={watchlistItems} userId={email} />
                     </div>
 
                     {/* News Section */}
-                    <Suspense fallback={<div className="flex justify-center p-12"><Loader2 className="animate-spin text-gray-500" /></div>}>
-                        <NewsGrid news={relevantNews || []} />
-                    </Suspense>
+                    <NewsGrid news={news} />
                 </div>
 
                 {/* Sidebar - Alerts */}
