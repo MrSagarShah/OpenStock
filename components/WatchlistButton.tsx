@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import { addToWatchlist, removeFromWatchlist, isStockInWatchlist } from "@/lib/actions/watchlist.actions";
-import { readSharedSession, sharedLoginUrl } from "@/lib/shared-session";
+import { readSharedSession, sharedLoginUrl, getSessionToken } from "@/lib/shared-session";
 import { toast } from "sonner";
 
 interface WatchlistButtonProps {
@@ -35,7 +35,7 @@ const WatchlistButton = ({
         if (!sess?.email) return;
         setResolvedUserId(sess.email);
         // No server-rendered membership state here — check it client-side.
-        isStockInWatchlist(sess.email, symbol).then((v) => setAdded(!!v)).catch(() => {});
+        isStockInWatchlist(sess.token, symbol).then((v) => setAdded(!!v)).catch(() => {});
     }, [userId, symbol]);
 
     const label = useMemo(() => {
@@ -59,10 +59,10 @@ const WatchlistButton = ({
         try {
             if (resolvedUserId) {
                 if (next) {
-                    await addToWatchlist(resolvedUserId, symbol, company);
+                    await addToWatchlist(getSessionToken(), symbol, company);
                     toast.success(`${symbol} added to watchlist`);
                 } else {
-                    await removeFromWatchlist(resolvedUserId, symbol);
+                    await removeFromWatchlist(getSessionToken(), symbol);
                     toast.success(`${symbol} removed from watchlist`);
                 }
             }

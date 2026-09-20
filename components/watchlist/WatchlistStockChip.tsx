@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { removeFromWatchlist } from "@/lib/actions/watchlist.actions";
+import { getSessionToken } from "@/lib/shared-session";
 import { getQuote } from "@/lib/actions/finnhub.actions";
 import { Bell, Loader2, X } from "lucide-react";
 import CreateAlertModal from "./CreateAlertModal";
@@ -38,7 +39,7 @@ export default function WatchlistStockChip({ symbol, userId }: WatchlistStockChi
     };
 
     const handleRemove = async () => {
-        await removeFromWatchlist(userId, symbol);
+        await removeFromWatchlist(getSessionToken(), symbol);
     };
 
     return (

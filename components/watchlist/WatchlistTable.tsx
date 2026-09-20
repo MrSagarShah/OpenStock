@@ -8,6 +8,7 @@ import CreateAlertModal from "./CreateAlertModal";
 import WatchlistButton from "@/components/WatchlistButton";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 import { removeFromWatchlist } from "@/lib/actions/watchlist.actions";
+import { getSessionToken } from "@/lib/shared-session";
 
 interface WatchlistTableProps {
     data: any[];
@@ -148,7 +149,7 @@ export default function WatchlistTable({ data, userId, onRefresh }: WatchlistTab
                                                 showTrashIcon={false}
                                                 onWatchlistChange={async (sym, added) => {
                                                     if (!added) {
-                                                        await removeFromWatchlist(userId, sym);
+                                                        await removeFromWatchlist(getSessionToken(), sym);
                                                         // Update local list faster than full page refresh if you want
                                                         setStocks((curr: any[]) => curr.filter((s: any) => s.symbol !== sym));
                                                         if (onRefresh) onRefresh();

@@ -12,6 +12,8 @@ export interface SharedSessionUser {
   email: string;
   id: string;   // stable user key; falls back to email
   name: string | null;
+  /** GoTrue access token — sent to server actions, which verify it (never trust `email`/`id` server-side). */
+  token: string;
 }
 
 export function readSharedSession(): SharedSessionUser | null {
@@ -23,10 +25,12 @@ export function readSharedSession(): SharedSessionUser | null {
     const u = parsed?.user || parsed?.currentSession?.user || parsed?.session?.user;
     if (!u?.email) return null;
     const meta = u.user_metadata || {};
+    const token = parsed?.access_token || parsed?.currentSession?.access_token || parsed?.session?.access_token || '';
     return {
       email: u.email,
       id: u.id || u.sub || u.email,
       name: meta.full_name || meta.name || null,
+      token,
     };
   } catch {
     return null;
@@ -38,4 +42,9 @@ export function readSharedSession(): SharedSessionUser | null {
 // stage + apex. Pass a post-login redirect target.
 export function sharedLoginUrl(redirectTo = '/markets/watchlist'): string {
   return `/auth?redirect=${encodeURIComponent(redirectTo)}`;
+}
+
+/** Current access token for server actions ('' when signed out). */
+export function getSessionToken(): string {
+  return readSharedSession()?.token || '';
 }

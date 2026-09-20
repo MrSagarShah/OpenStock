@@ -2,26 +2,28 @@
 
 import { connectToDatabase } from '@/database/mongoose';
 import { Watchlist } from '@/database/models/watchlist.model';
+import { requireUserEmail } from '@/lib/server/verify-user';
 import { revalidatePath } from 'next/cache';
 
-// -- CRUD Operations --
+// Every action takes the caller's shared-login access token and derives the owner
+// from it server-side. A userId/email supplied by the browser is never trusted.
 
-export async function addToWatchlist(userId: string, symbol: string, company: string) {
+const cleanSymbol = (s: string) => {
+    const v = String(s || '').trim().toUpperCase();
+    if (!v || v.length > 30) throw new Error('Invalid symbol');
+    return v;
+};
+
+export async function addToWatchlist(token: string, symbol: string, company: string) {
+    const userId = await requireUserEmail(token);
+    const sym = cleanSymbol(symbol);
     try {
         await connectToDatabase();
-
-        // Upsert to avoid duplicates/errors if it already exists
         const newItem = await Watchlist.findOneAndUpdate(
-            { userId, symbol: symbol.toUpperCase() },
-            {
-                userId,
-                symbol: symbol.toUpperCase(),
-                company,
-                addedAt: new Date()
-            },
+            { userId, symbol: sym },
+            { userId, symbol: sym, company: String(company || '').slice(0, 200), addedAt: new Date() },
             { upsert: true, new: true }
         );
-
         revalidatePath('/watchlist');
         return JSON.parse(JSON.stringify(newItem));
     } catch (error) {
@@ -30,12 +32,14 @@ export async function addToWatchlist(userId: string, symbol: string, company: st
     }
 }
 
-export async function removeFromWatchlist(userId: string, symbol: string) {
+export async function removeFromWatchlist(token: string, symbol: string) {
+    const userId = await requireUserEmail(token);
+    const sym = cleanSymbol(symbol);
     try {
         await connectToDatabase();
-        await Watchlist.findOneAndDelete({ userId, symbol: symbol.toUpperCase() });
+        await Watchlist.findOneAndDelete({ userId, symbol: sym });
         revalidatePath('/watchlist');
-        revalidatePath('/'); // In case it's used elsewhere
+        revalidatePath('/');
         return { success: true };
     } catch (error) {
         console.error('Error removing from watchlist:', error);
@@ -43,7 +47,8 @@ export async function removeFromWatchlist(userId: string, symbol: string) {
     }
 }
 
-export async function getUserWatchlist(userId: string) {
+export async function getUserWatchlist(token: string) {
+    const userId = await requireUserEmail(token);
     try {
         await connectToDatabase();
         const watchlist = await Watchlist.find({ userId }).sort({ addedAt: -1 });
@@ -54,40 +59,14 @@ export async function getUserWatchlist(userId: string) {
     }
 }
 
-// Check if a symbol is in the user's watchlist
-export async function isStockInWatchlist(userId: string, symbol: string) {
+export async function isStockInWatchlist(token: string, symbol: string) {
     try {
+        const userId = await requireUserEmail(token);
         await connectToDatabase();
-        const item = await Watchlist.findOne({ userId, symbol: symbol.toUpperCase() });
+        const item = await Watchlist.findOne({ userId, symbol: cleanSymbol(symbol) });
         return !!item;
     } catch (error) {
         console.error('Error checking watchlist status:', error);
         return false;
-    }
-}
-
-// -- Legacy Support (if needed by other components) --
-
-export async function getWatchlistSymbolsByEmail(email: string): Promise<string[]> {
-    if (!email) return [];
-
-    try {
-        const mongoose = await connectToDatabase();
-        const db = mongoose.connection.db;
-        if (!db) throw new Error('MongoDB connection not found');
-
-        // Better Auth stores users in the "user" collection
-        const user = await db.collection('user').findOne<{ _id?: unknown; id?: string; email?: string }>({ email });
-
-        if (!user) return [];
-
-        const userId = (user.id as string) || String(user._id || '');
-        if (!userId) return [];
-
-        const items = await Watchlist.find({ userId }, { symbol: 1 }).lean();
-        return items.map((i) => String(i.symbol));
-    } catch (err) {
-        console.error('getWatchlistSymbolsByEmail error:', err);
-        return [];
     }
 }

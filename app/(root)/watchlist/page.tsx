@@ -31,8 +31,8 @@ export default function WatchlistPage() {
         let active = true;
         (async () => {
             const [items, userAlerts, initialNews] = await Promise.all([
-                getUserWatchlist(sess.email),
-                getUserAlerts(sess.email),
+                getUserWatchlist(sess.token),
+                getUserAlerts(sess.token),
                 getNews(),
             ]);
             const symbols = items.map((item: any) => item.symbol);

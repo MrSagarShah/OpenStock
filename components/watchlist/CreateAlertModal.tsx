@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { createAlert } from "@/lib/actions/alert.actions";
+import { getSessionToken } from "@/lib/shared-session";
 import { toast } from "sonner"; // Assuming sonner is available or use existing toast
 
 interface CreateAlertModalProps {
@@ -52,7 +53,7 @@ export default function CreateAlertModal({
         setLoading(true);
         try {
             await createAlert({
-                userId,
+                token: getSessionToken(),
                 symbol,
                 targetPrice: parseFloat(targetPrice),
                 condition,
