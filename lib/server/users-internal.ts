@@ -1,4 +1,5 @@
-'use server';
+// Server-only helper for background jobs. NOT a server action: it must never be callable from the browser
+// (it lists every user's email).
 
 import {connectToDatabase} from "@/database/mongoose";
 
