@@ -1,54 +1,66 @@
-import Link from "next/link";
+// Canonical Good Thoughts footer — same on every section (finance, markets, IPO,
+// blog, monitor, landing, info pages). Hand-copied into each app (same pattern as
+// GoodThoughtsShell.jsx); keep copies in sync by diffing against this file.
+//
+// Every link is a plain <a>, not a router <Link>: these are apex-level static
+// routes (served by goodthoughts-info-stage / the section containers) that exist
+// outside any single app's client-side router, so a framework Link would 404 on
+// first load in some of these apps. Do not add app-specific nav links here —
+// that belongs in each app's own in-page navigation, not this shared footer.
+
+const SECTIONS = [
+  { label: 'Finance', href: '/' },
+  { label: 'Markets', href: '/markets' },
+  { label: 'IPO', href: '/ipo' },
+  { label: 'Blog', href: '/blog/' },
+  { label: 'Monitor', href: '/monitor' },
+];
+
+const LEGAL = [
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Privacy', href: '/privacy' },
+  { label: 'Terms', href: '/terms' },
+  { label: 'Disclaimer', href: '/disclaimer' },
+  { label: 'Cookies', href: '/cookies' },
+  { label: 'Payment Policy', href: '/payment-policy' },
+];
 
 const Footer = () => {
-    return (
-        <footer className="bg-gray-900 text-white border-t border-gray-800">
-            <div className="container mx-auto px-4 py-10">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div className="col-span-1 md:col-span-2">
-                        <Link href="/" className="flex items-center gap-2 mb-4">
-                            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#065f46] text-gray-900 font-black text-lg">GT</span>
-                            <span className="flex flex-col leading-tight">
-                                <span className="text-lg font-bold text-gray-100">Good Thoughts</span>
-                                <span className="text-xs font-medium tracking-widest text-[#065f46] uppercase">Stocks</span>
-                            </span>
-                        </Link>
-                        <p className="text-gray-400 mb-6 max-w-md">
-                            Good Thoughts Stocks — track US market prices, explore charts and technicals, and manage your watchlist. For Indian markets, visit{' '}
-                            <a href="https://financial.goodthoughts.in" className="text-[#065f46] hover:underline">Good Thoughts Financial</a>.
-                        </p>
-                    </div>
-
-                    <div>
-                        <h3 className="text-lg font-semibold mb-4">Resources</h3>
-                        <ul className="space-y-2">
-                            <li>
-                                <Link href="/help" className="text-gray-400 hover:text-white transition-colors">
-                                    Help Center
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/terms" className="text-gray-400 hover:text-white transition-colors">
-                                    Terms of Service
-                                </Link>
-                            </li>
-                            <li>
-                                <a href="https://financial.goodthoughts.in" className="text-gray-400 hover:text-white transition-colors">
-                                    Good Thoughts Financial
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div className="border-t border-gray-800 mt-8 pt-8">
-                    <div className="text-gray-400 text-sm text-center">
-                        © {new Date().getFullYear()} Good Thoughts. All rights reserved.
-                    </div>
-                </div>
+  const year = new Date().getFullYear();
+  return (
+    <footer style={{ borderTop: '1px solid rgba(0,69,50,0.12)', background: '#f6fdf9' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '32px 24px 24px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, justifyContent: 'space-between' }}>
+          <div style={{ maxWidth: 320 }}>
+            <div style={{ fontWeight: 700, fontSize: 18, color: '#004532', fontFamily: 'Lora, serif' }}>Good Thoughts</div>
+            <p style={{ fontSize: 13, color: '#5b6b63', marginTop: 8, lineHeight: 1.6 }}>
+              Market data, IPOs, monitoring and editorial content for research — not investment advice.
+            </p>
+          </div>
+          <div>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: '#5b6b63', marginBottom: 10 }}>Sections</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {SECTIONS.map((s) => (
+                <a key={s.href} href={s.href} style={{ fontSize: 13, color: '#374b41', textDecoration: 'none' }}>{s.label}</a>
+              ))}
             </div>
-        </footer>
-    );
-};
+          </div>
+          <div>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: '#5b6b63', marginBottom: 10 }}>Legal</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {LEGAL.map((l) => (
+                <a key={l.href} href={l.href} style={{ fontSize: 13, color: '#374b41', textDecoration: 'none' }}>{l.label}</a>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div style={{ marginTop: 28, paddingTop: 16, borderTop: '1px solid rgba(0,69,50,0.08)', fontSize: 12, color: '#8a9a91' }}>
+          © {year} Good Thoughts. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  );
+}
 
 export default Footer;
