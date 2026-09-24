@@ -173,14 +173,6 @@ const GROUPS = [
       {
         "label": "NSDL",
         "href": "https://nsdl.co.in/"
-      },
-      {
-        "label": "World Monitor",
-        "href": "/monitor"
-      },
-      {
-        "label": "IPO Tracker",
-        "href": "/ipo"
       }
     ]
   },
