@@ -142,6 +142,13 @@ export default function GoodThoughtsShell({ current = 'finance', user = null, on
 
   const label = acct ? (acct.name || acct.email) : null
 
+  // Phone section tabs: keep the active tab in view when the strip scrolls.
+  useEffect(() => {
+    const el = document.querySelector('.gt-mtab-on')
+    const bar = el && el.parentElement
+    if (bar) bar.scrollLeft = el.offsetLeft - (bar.clientWidth - el.offsetWidth) / 2
+  }, [current])
+
   return (
     <nav className="w-full z-50 bg-emerald-50/80 backdrop-blur-md shadow-sm shadow-emerald-900/5">
       <div className="flex justify-between items-center gap-6 px-6 md:px-8 py-3 max-w-[1400px] mx-auto">
@@ -205,6 +212,20 @@ export default function GoodThoughtsShell({ current = 'finance', user = null, on
             </a>
           )}
         </div>
+      </div>
+      {/* Phone-only section switcher: the row above hides these links below md */}
+      <div className="gt-mtabs" role="navigation" aria-label="Sections">
+        <style>{`.gt-mtabs{display:flex;gap:5px;overflow-x:auto;padding:0 12px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.gt-mtabs::-webkit-scrollbar{display:none}@media(min-width:768px){.gt-mtabs{display:none}}.gt-mtab{flex:0 0 auto;padding:6px 11px;border-radius:9999px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#2a3346;background:rgba(0,69,50,.08);text-decoration:none;white-space:nowrap}.gt-mtab-on{background:#004532;color:#fff}`}</style>
+        {SECTIONS.map((s) => (
+          <a
+            key={s.key}
+            href={s.href}
+            aria-current={s.key === current ? 'page' : undefined}
+            className={s.key === current ? 'gt-mtab gt-mtab-on' : 'gt-mtab'}
+          >
+            {s.label}
+          </a>
+        ))}
       </div>
       <ProductTicker />
     </nav>
