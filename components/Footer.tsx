@@ -183,37 +183,39 @@ const GROUPS = [
         "href": "/ipo"
       }
     ]
-  }
-];
-
-const LEGAL = [
-  {
-    "label": "About",
-    "href": "/about"
   },
   {
-    "label": "Contact",
-    "href": "/contact"
-  },
-  {
-    "label": "Privacy",
-    "href": "/privacy"
-  },
-  {
-    "label": "Terms",
-    "href": "/terms"
-  },
-  {
-    "label": "Disclaimer",
-    "href": "/disclaimer"
-  },
-  {
-    "label": "Cookies",
-    "href": "/cookies"
-  },
-  {
-    "label": "Payment Policy",
-    "href": "/payment-policy"
+    "title": "Company & Legal",
+    "links": [
+      {
+        "label": "About",
+        "href": "/about"
+      },
+      {
+        "label": "Contact",
+        "href": "/contact"
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy"
+      },
+      {
+        "label": "Terms",
+        "href": "/terms"
+      },
+      {
+        "label": "Disclaimer",
+        "href": "/disclaimer"
+      },
+      {
+        "label": "Cookies",
+        "href": "/cookies"
+      },
+      {
+        "label": "Payment Policy",
+        "href": "/payment-policy"
+      }
+    ]
   }
 ];
 
@@ -241,42 +243,41 @@ const linkProps = (href: string) =>
 
 const Footer = () => {
   const year = new Date().getFullYear();
-  const link = { fontSize: 12.5, color: '#374b41', textDecoration: 'none' };
   return (
     <footer style={{ borderTop: '1px solid rgba(0,69,50,0.12)', background: '#f6fdf9' }}>
-      <style>{`.gt-foot-row{display:grid;grid-template-columns:1fr;gap:4px 16px;padding:7px 0}@media(min-width:640px){.gt-foot-row{grid-template-columns:175px 1fr;align-items:baseline}}.gt-foot-links{display:flex;flex-wrap:wrap;gap:4px 16px}`}</style>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '20px 24px 14px' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px 24px', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 10 }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', gap: '2px 14px' }}>
-            <span style={{ fontWeight: 700, fontSize: 17, color: '#004532', fontFamily: 'Lora, serif' }}>Good Thoughts</span>
-            <span style={{ fontSize: 12.5, color: '#5b6b63' }}>Market data, IPOs, monitoring and editorial content for research — not investment advice.</span>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '32px 24px 24px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 28 }}>
+          <div style={{ maxWidth: 380 }}>
+            <div style={{ fontWeight: 700, fontSize: 18, color: '#004532', fontFamily: 'Lora, serif' }}>Good Thoughts</div>
+            <p style={{ fontSize: 13, color: '#5b6b63', marginTop: 8, lineHeight: 1.6 }}>
+              Market data, IPOs, monitoring and editorial content for research — not investment advice.
+            </p>
           </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 14px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
             {SOCIAL.map((s) => (
-              <a key={s.href} href={s.href} {...linkProps(s.href)} style={{ ...link, fontWeight: 600 }}>{s.label}</a>
+              <a key={s.href} href={s.href} {...linkProps(s.href)} style={{ fontSize: 13, color: '#374b41', textDecoration: 'none' }}>{s.label}</a>
             ))}
           </div>
         </div>
-        {GROUPS.map((g) => (
-          <div key={g.title} className="gt-foot-row" style={{ borderTop: '1px solid rgba(0,69,50,0.08)' }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: '#5b6b63' }}>{g.title}</div>
-            <div className="gt-foot-links">
-              {g.links.map((l) => (
-                <a key={l.label + l.href} href={l.href} {...linkProps(l.href)} style={link}>{l.label}</a>
-              ))}
+        <style>{`.gt-foot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 24px}@media(min-width:640px){.gt-foot-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(min-width:960px){.gt-foot-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 32px}}`}</style>
+        <div className="gt-foot-grid">
+          {GROUPS.map((g) => (
+            <div key={g.title}>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.06em', textTransform: 'uppercase', color: '#5b6b63', marginBottom: 10 }}>{g.title}</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {g.links.map((l) => (
+                  <a key={l.label + l.href} href={l.href} {...linkProps(l.href)} style={{ fontSize: 13, color: '#374b41', textDecoration: 'none' }}>{l.label}</a>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-        <div style={{ marginTop: 4, paddingTop: 10, borderTop: '1px solid rgba(0,69,50,0.08)', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '6px 24px', alignItems: 'baseline' }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 16px' }}>
-            {LEGAL.map((l) => (
-              <a key={l.href} href={l.href} {...linkProps(l.href)} style={link}>{l.label}</a>
-            ))}
-          </div>
-          <div style={{ fontSize: 12, color: '#8a9a91' }}>
-            © {year} Good Thoughts. All rights reserved. · Built by{' '}
+          ))}
+        </div>
+        <div style={{ marginTop: 28, paddingTop: 16, borderTop: '1px solid rgba(0,69,50,0.08)', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 8, fontSize: 12, color: '#8a9a91' }}>
+          <span>© {year} Good Thoughts. All rights reserved.</span>
+          <span>
+            Built by{' '}
             <a href="https://krakelabsindia.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#374b41', textDecoration: 'none', fontWeight: 600 }}>KLI</a>
-          </div>
+          </span>
         </div>
       </div>
     </footer>
