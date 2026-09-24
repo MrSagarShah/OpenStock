@@ -278,7 +278,7 @@ const Footer = () => {
             </div>
           ))}
         </div>
-        <div style={{ marginTop: 28, paddingTop: 16, borderTop: '1px solid rgba(0,69,50,0.08)', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 8, fontSize: 12, color: '#8a9a91' }}>
+        <div style={{ marginTop: 28, paddingTop: 16, borderTop: '1px solid rgba(0,69,50,0.08)', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 8, fontSize: 12, color: '#5b6b63' }}>
           <span>© {year} Good Thoughts. All rights reserved.</span>
           <span>
             Built by{' '}
