@@ -184,7 +184,7 @@ export default function GoodThoughtsShell({ current = 'finance', user = null, on
         <div className="flex items-center gap-3 shrink-0">
           {acct ? (
             <div className="flex items-center gap-2.5">
-              <span className="hidden lg:block text-sm font-medium" style={{ color: '#131b2e' }}>
+              <span className="hidden xl:block max-w-[200px] truncate text-sm font-medium" style={{ color: '#131b2e' }}>
                 {label}
               </span>
               <div
