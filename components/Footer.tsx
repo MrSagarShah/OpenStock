@@ -27,6 +27,10 @@ const GROUPS = [
       {
         "label": "World Monitor",
         "href": "/monitor"
+      },
+      {
+        "label": "Research",
+        "href": "/research/"
       }
     ]
   },
@@ -52,6 +56,10 @@ const GROUPS = [
       {
         "label": "Indices",
         "href": "/indices"
+      },
+      {
+        "label": "Good AI",
+        "href": "/research/ask"
       }
     ]
   },

@@ -24,7 +24,7 @@
  * is a full document load by design.
  *
  * Props:
- *   current   — 'finance' | 'markets' | 'ipo' | 'blog' | 'monitor'
+ *   current   — 'finance' | 'markets' | 'ipo' | 'blog' | 'monitor' | 'research'
  *   user      — optional { name, email }; if omitted, read from the gt-auth session
  *   onSignIn  — optional handler; otherwise the slot links to /auth
  */
@@ -37,6 +37,7 @@ const SECTIONS = [
   { key: 'ipo', label: 'IPO', href: '/ipo/' },
   { key: 'blog', label: 'Blog', href: '/blog/' },
   { key: 'monitor', label: 'Monitor', href: '/monitor/' },
+  { key: 'research', label: 'Research', href: '/research/' },
 ]
 
 const SERIF = { fontFamily: "var(--font-lora), 'Lora', Georgia, 'Times New Roman', serif" }
