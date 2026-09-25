@@ -152,14 +152,14 @@ export default function GoodThoughtsShell({ current = 'finance', user = null, on
 
   return (
     <nav className="w-full z-50 bg-emerald-50/80 backdrop-blur-md shadow-sm shadow-emerald-900/5">
-      <div className="flex justify-between items-center gap-6 px-6 md:px-8 py-3 max-w-[1400px] mx-auto">
+      <div className="flex justify-between items-center gap-3 lg:gap-6 px-6 lg:px-8 py-3 max-w-[1400px] mx-auto">
         {/* Brand */}
-        <a href="/" className="shrink-0 text-xl md:text-2xl font-bold tracking-tight" style={{ ...SERIF, color: PRIMARY }}>
+        <a href="/" className="shrink-0 text-xl lg:text-2xl font-bold tracking-tight" style={{ ...SERIF, color: PRIMARY }}>
           Good Thoughts
         </a>
 
         {/* Section links */}
-        <div className="hidden md:flex items-center gap-7">
+        <div className="hidden md:flex items-center gap-4 lg:gap-7">
           {SECTIONS.map((s) => {
             const active = s.key === current
             return (
@@ -184,7 +184,7 @@ export default function GoodThoughtsShell({ current = 'finance', user = null, on
         <div className="flex items-center gap-3 shrink-0">
           {acct ? (
             <div className="flex items-center gap-2.5">
-              <span className="hidden sm:block text-sm font-medium" style={{ color: '#131b2e' }}>
+              <span className="hidden lg:block text-sm font-medium" style={{ color: '#131b2e' }}>
                 {label}
               </span>
               <div
